@@ -1,0 +1,22 @@
+subprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = '1.7'
+    targetCompatibility = '1.7'
+
+    repositories {
+       mavenCentral()
+    }
+
+    dependencies {
+        compile (
+            'io.dropwizard:dropwizard-core:0.8.0'
+        )
+    }
+
+    version = '1.0'
+
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+}
