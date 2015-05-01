@@ -1,4 +1,4 @@
-package com.example.session.resources;
+package com.example.frontend.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;

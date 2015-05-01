@@ -1,6 +1,6 @@
-package com.example.session;
+package com.example.authentication;
 
-import com.example.session.resources.AuthenticationResource;
+import com.example.authentication.resources.AuthenticationResource;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;

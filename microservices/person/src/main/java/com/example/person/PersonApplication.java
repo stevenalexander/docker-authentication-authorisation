@@ -1,18 +1,19 @@
-package com.example.session;
+package com.example.person;
 
+import com.example.person.resources.PersonResource;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-public class AuthorisationApplication extends Application<Configuration> {
+public class PersonApplication extends Application<Configuration> {
     public static void main(String[] args) throws Exception {
-        new AuthorisationApplication().run(args);
+        new PersonApplication().run(args);
     }
 
     @Override
     public String getName() {
-        return "example-application";
+        return "person-application";
     }
 
     @Override
@@ -21,8 +22,8 @@ public class AuthorisationApplication extends Application<Configuration> {
 
     @Override
     public void run(Configuration configuration, Environment environment) {
-        //final PersonResource personResource = new PersonResource();
+        final PersonResource PersonResource = new PersonResource();
 
-        //environment.jersey().register(personResource);
+        environment.jersey().register(PersonResource);
     }
 }

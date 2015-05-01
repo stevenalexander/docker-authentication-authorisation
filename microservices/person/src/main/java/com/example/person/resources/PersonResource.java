@@ -1,14 +1,14 @@
-package com.example.session.resources;
+package com.example.person.resources;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
-public class AuthenticationResource {
+public class PersonResource {
 
-    @POST
-    public String authenticateUser(){
+    @GET
+    public String getPerson(){
         throw new WebApplicationException(500);
     }
 }

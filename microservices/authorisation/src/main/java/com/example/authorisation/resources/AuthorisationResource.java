@@ -1,4 +1,4 @@
-package com.example.session.resources;
+package com.example.authorisation.resources;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
