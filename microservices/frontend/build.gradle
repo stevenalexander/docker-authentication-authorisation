@@ -9,6 +9,13 @@ buildscript {
     }
 }
 
+dependencies {
+    compile (
+        'io.dropwizard:dropwizard-views:0.8.0',
+        'io.dropwizard:dropwizard-views-freemarker:0.8.0'
+    )
+}
+
 task oneJar(type: OneJar) {
     mainClass = 'com.example.application.FrontendApplication'
     archiveName = 'FrontendApplication.jar'
