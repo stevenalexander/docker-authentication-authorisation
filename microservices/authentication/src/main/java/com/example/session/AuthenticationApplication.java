@@ -1,19 +1,19 @@
-package com.example.frontend;
+package com.example.session;
 
-import com.example.frontend.resources.FrontendResource;
+import com.example.session.resources.AuthenticationResource;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-public class FrontendApplication extends Application<Configuration> {
+public class AuthenticationApplication extends Application<Configuration> {
     public static void main(String[] args) throws Exception {
-        new FrontendApplication().run(args);
+        new AuthenticationApplication().run(args);
     }
 
     @Override
     public String getName() {
-        return "frontend-application";
+        return "authentication-application";
     }
 
     @Override
@@ -22,8 +22,8 @@ public class FrontendApplication extends Application<Configuration> {
 
     @Override
     public void run(Configuration configuration, Environment environment) {
-        final FrontendResource frontendResource = new FrontendResource();
+        final AuthenticationResource authenticationResource = new AuthenticationResource();
 
-        environment.jersey().register(frontendResource);
+        environment.jersey().register(authenticationResource);
     }
 }

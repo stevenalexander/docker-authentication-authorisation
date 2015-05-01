@@ -1,4 +1,4 @@
-package com.example.frontend.resources;
+package com.example.session.resources;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
