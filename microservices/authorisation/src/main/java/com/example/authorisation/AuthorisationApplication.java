@@ -1,5 +1,6 @@
 package com.example.authorisation;
 
+import com.example.authorisation.resources.AuthorisationResource;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
@@ -12,7 +13,7 @@ public class AuthorisationApplication extends Application<Configuration> {
 
     @Override
     public String getName() {
-        return "example-application";
+        return "authorisation-application";
     }
 
     @Override
@@ -21,8 +22,8 @@ public class AuthorisationApplication extends Application<Configuration> {
 
     @Override
     public void run(Configuration configuration, Environment environment) {
-        //final PersonResource personResource = new PersonResource();
+        final AuthorisationResource authorisationResource = new AuthorisationResource();
 
-        //environment.jersey().register(personResource);
+        environment.jersey().register(authorisationResource);
     }
 }
