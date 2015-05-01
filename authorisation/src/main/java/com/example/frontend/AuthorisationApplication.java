@@ -1,13 +1,13 @@
-package com.example.application;
+package com.example.frontend;
 
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-public class ExampleApplication extends Application<Configuration> {
+public class AuthorisationApplication extends Application<Configuration> {
     public static void main(String[] args) throws Exception {
-        new ExampleApplication().run(args);
+        new AuthorisationApplication().run(args);
     }
 
     @Override
