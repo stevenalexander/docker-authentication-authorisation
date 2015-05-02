@@ -10,7 +10,7 @@ buildscript {
 }
 
 task oneJar(type: OneJar) {
-    mainClass = 'com.example.authentication.SessionApplication'
+    mainClass = 'com.example.session.SessionApplication'
     archiveName = 'SessionApplication.jar'
 }
 
