@@ -70,12 +70,10 @@ TODO tests and chaos monkey style kill tests
 
 ## Running the containers
 
-To run nginx-lua:
-
 ```
 # Build
-docker build -t="example/nginx-lua" docker/nginx-lua/Dockerfile
+gradle buildJar
 
-# Run
-docker run -t -i -P -v=`pwd`/nginx-lua:/conf -w=/conf example/nginx-lua
+# Run containers with dev architecture
+docker-compose -f dev-docker-compose.yml up -d
 ```
