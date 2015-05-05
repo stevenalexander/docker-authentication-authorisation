@@ -5,3 +5,10 @@ server:
   connector:
     type: http
     port: 8084
+
+logging:
+  level: WARN
+  appenders:
+    - type: file
+      currentLogFilename: /log/session.log
+      archive: false

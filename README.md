@@ -75,5 +75,7 @@ TODO tests and chaos monkey style kill tests
 gradle buildJar
 
 # Run containers with dev architecture
-docker-compose -f dev-docker-compose.yml up -d
+docker-compose -f dev-docker-compose.yml up
+
+# curl your boot2docker VM IP on port 8080 to get the login page
 ```

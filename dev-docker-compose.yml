@@ -7,10 +7,20 @@ frontend:
    - docker/volume-log:/log
   command: ["java", "-jar", "-Done-jar.silent=true", "/frontend/FrontendApplication.jar", "server", "/frontend/config.yml"]
 
+session:
+  image: java:8-jre
+  ports:
+   - "8084:8084"
+  volumes:
+   - docker/volume-session:/session
+   - docker/volume-log:/log
+  command: ["java", "-jar", "-Done-jar.silent=true", "/session/SessionApplication.jar", "server", "/session/config.yml"]
+
 web:
   build: docker/image-nginx-lua/.
   links:
    - frontend
+   - session
   ports:
    - "8080:8080"
   volumes:
