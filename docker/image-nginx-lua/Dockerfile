@@ -1,26 +1,29 @@
-# Dockerfile for nginx web server using OpenResty as a reverse proxy for a microservice solution, handling authentication and authorisation
+FROM debian:jessie
 
-FROM ubuntu:14.04
-MAINTAINER Steven Alexander <steven.william.alexander@googlemail.com>
-ENV REFRESHED_AT 2015-04-09
+MAINTAINER NGINX Steven Alexander "steven.william.alexander@googlemail.com"
 
-ENV    DEBIAN_FRONTEND noninteractive
-RUN    echo "deb-src http://archive.ubuntu.com/ubuntu trusty main" >> /etc/apt/sources.list
-RUN    sed 's/main$/main universe/' -i /etc/apt/sources.list
-RUN    apt-get update
-RUN    apt-get upgrade -y
-RUN    apt-get -y install wget vim git libpq-dev
+ENV OPENRESTY_VERSION 1.7.10.1
 
-# Openresty (Nginx)
-RUN    apt-get -y build-dep nginx \
-  && apt-get -q -y clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
-RUN    wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz \
-  && tar xvfz ngx_openresty-1.7.10.1.tar.gz \
-  && cd ngx_openresty-1.7.10.1 \
-  && ./configure --with-luajit --with-http_ssl_module --with-ipv6 --with-pcre-jit \
-  && make \
-  && make install \
-  && rm -rf /ngx_openresty*
+# OpenResty deps
+RUN apt-get update && \
+	apt-get -y install libreadline-dev libncurses5-dev libpcre3-dev libssl-dev perl build-essential curl
 
-EXPOSE 8080
-CMD /usr/local/openresty/nginx/sbin/nginx -p `pwd` -c nginx.conf
+# Install OpenResty with minimum modules for Lua scripting
+RUN curl -O http://openresty.org/download/ngx_openresty-${OPENRESTY_VERSION}.tar.gz && \
+	tar xzvf ngx_openresty-${OPENRESTY_VERSION}.tar.gz && \
+	cd ngx_openresty-${OPENRESTY_VERSION}/ && \
+    ./configure --with-luajit --with-http_gzip_static_module --with-http_ssl_module --with-pcre-jit && \
+	make && \
+	make install && \
+	rm -rf /ngx_openresty*
+
+# forward request and error logs to docker log collector
+RUN mkdir /var/log/nginx && touch /var/log/nginx/access.log && touch /var/log/nginx/error.log
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
+
+VOLUME ["/opt/nginx/conf"]
+
+EXPOSE 80 443
+
+CMD ["/usr/local/openresty/nginx/sbin/nginx", "-p", "/opt/nginx/conf", "-c", "nginx.conf"]

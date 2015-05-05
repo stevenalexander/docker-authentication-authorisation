@@ -8,11 +8,11 @@ frontend:
   command: ["java", "-jar", "-Done-jar.silent=true", "/frontend/FrontendApplication.jar", "server", "/frontend/config.yml"]
 
 web:
-  image: nginx
+  build: docker/image-nginx-lua/.
   links:
    - frontend
   ports:
-   - "8080:80"
+   - "8080:8080"
   volumes:
-   - docker/volume-nginx-conf.d:/etc/nginx/conf.d
-   - docker/volume-nginx-log:/var/log/nginx
+   - docker/volume-nginx-conf.d:/opt/nginx/conf
+   - docker/volume-log:/var/log/nginx

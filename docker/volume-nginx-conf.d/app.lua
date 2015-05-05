@@ -1,4 +1,2 @@
-    ngx.say('Hello World!')
-    ngx.exit(200)
-
-
+ngx.say('Hello World!')
+ngx.exit(200)
