@@ -6,9 +6,11 @@
 <#if persons?has_content>
 <ul>
 <#list persons as person>
-  <li>${person.firstName} ${person.lastName}</li>
+  <li><a href="/persons/${person.id}">${person.firstName} ${person.lastName}</a></li>
 </#list>
 </ul>
 </#if>
+
+<a href="/persons/add">Add Person</a>
 
 </#macro>

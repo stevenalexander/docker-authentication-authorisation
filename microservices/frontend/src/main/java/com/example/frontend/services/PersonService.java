@@ -27,4 +27,12 @@ public class PersonService {
             .header("callerId", callerId)
             .get(new GenericType<List<Person>>() {});
     }
+
+    public Person get(String callerId, int personId) {
+        return personTarget
+            .path("/" + personId)
+            .request(MediaType.APPLICATION_JSON)
+            .header("callerId", callerId)
+            .get(Person.class);
+    }
 }

@@ -2,15 +2,10 @@ package com.example.frontend.resources;
 
 import com.example.api.model.Person;
 import com.example.frontend.services.PersonService;
-import com.example.frontend.views.IndexView;
-import com.example.frontend.views.LoginView;
-import com.example.frontend.views.PersonsView;
+import com.example.frontend.views.*;
 import io.dropwizard.views.View;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -41,5 +36,27 @@ public class FrontendResource {
         List<Person> persons = personService.getAll(callerId);
 
         return new PersonsView(callerId, persons);
+    }
+
+    @GET
+    @Path("/persons/add")
+    public View personsAdd(@HeaderParam("callerId") String callerId){
+        return new PersonEditView(callerId, null, true);
+    }
+
+    @GET
+    @Path("/persons/{personId}")
+    public View getPerson(@HeaderParam("callerId") String callerId, @PathParam("personId") int personId){
+        Person person = personService.get(callerId, personId);
+
+        return new PersonView(callerId, person);
+    }
+
+    @GET
+    @Path("/persons/{personId}/edit")
+    public View personsAdd(@HeaderParam("callerId") String callerId, @PathParam("personId") int personId){
+        Person person = personService.get(callerId, personId);
+
+        return new PersonEditView(callerId, person, false);
     }
 }
