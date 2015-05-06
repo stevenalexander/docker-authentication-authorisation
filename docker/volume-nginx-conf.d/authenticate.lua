@@ -2,6 +2,7 @@
 ngx.log(ngx.NOTICE, 'BEGIN authenticate.lua')
 
 -- Call Authentication microservice to check users credentials
+ngx.req.read_body()
 local authenticationResult = ngx.location.capture('/authentication', { method = ngx.HTTP_POST, always_forward_body = true  })
 
 if authenticationResult.status ~= ngx.HTTP_OK then

@@ -90,6 +90,7 @@ docker-compose -f dev-docker-compose.yml up
 ## TODO list
 
 - smart redirects on 401 when no AccessToken, saving target URL in query and redirecting when logged in
+	- on authentication fail should display validation error
 - main template should look for callerId header and show login/logout accordingly
 - 401/404/500 pages
 - tests
