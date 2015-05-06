@@ -5,3 +5,10 @@ server:
   connector:
     type: http
     port: 8082
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: /log/authentication.log
+      archive: false

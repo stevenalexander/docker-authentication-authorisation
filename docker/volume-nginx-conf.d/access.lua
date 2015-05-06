@@ -1,12 +1,11 @@
 
-ngx.log(ngx.NOTICE, 'BEGIN access.lua for ' .. ngx.var.uri)
-
 -- Check against list of non-protected endpoints
 if  string.find(ngx.var.uri, "^/login$") or
-	string.find(ngx.var.uri, "^/logout$") then
-	ngx.log(ngx.NOTICE, 'Does not require authentication')
-	return
+	  string.find(ngx.var.uri, "^/logout$") then
+	  return
 end
+
+ngx.log(ngx.NOTICE, 'BEGIN access.lua for ' .. ngx.var.uri)
 
 local accessToken = ngx.var.cookie_AccessToken
 

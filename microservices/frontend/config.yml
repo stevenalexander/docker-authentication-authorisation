@@ -12,7 +12,7 @@ viewRendererConfiguration:
     whitespace_stripping: yes
 
 logging:
-  level: WARN
+  level: INFO
   appenders:
     - type: file
       currentLogFilename: /log/frontend.log

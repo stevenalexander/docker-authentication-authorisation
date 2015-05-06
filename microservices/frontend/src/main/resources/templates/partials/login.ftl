@@ -3,7 +3,7 @@
 
 <h1>Login</h1>
 
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="/login">
   <div class="form-group">
     <label for="emailaddress" class="col-sm-2 control-label">Email address</label>
     <div class="col-sm-10">

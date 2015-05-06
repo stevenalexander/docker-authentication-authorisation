@@ -70,6 +70,13 @@ TODO tests and chaos monkey style kill tests
 
 ## Running the containers
 
+Requires:
+* [Docker](https://www.docker.com/)
+* [Boot2Docker](http://boot2docker.io/)
+* [Docker-compose](http://docs.docker.com/compose/)
+* JDK (to compile java file locally)
+* [Gradle](https://gradle.org/) (for build automation)
+
 ```
 # Build
 gradle buildJar
@@ -79,3 +86,11 @@ docker-compose -f dev-docker-compose.yml up
 
 # curl your boot2docker VM IP on port 8080 to get the login page
 ```
+
+## TODO list
+
+- smart redirects on 401 when no AccessToken, saving target URL in query and redirecting when logged in
+- main template should look for callerId header and show login/logout accordingly
+- 401/404/500 pages
+- tests
+- architecture diagrams/sequence diagram

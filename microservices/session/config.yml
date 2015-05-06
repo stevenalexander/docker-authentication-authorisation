@@ -7,7 +7,7 @@ server:
     port: 8084
 
 logging:
-  level: WARN
+  level: INFO
   appenders:
     - type: file
       currentLogFilename: /log/session.log

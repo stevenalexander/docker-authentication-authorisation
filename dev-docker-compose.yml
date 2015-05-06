@@ -7,6 +7,15 @@ frontend:
    - docker/volume-log:/log
   command: ["java", "-jar", "-Done-jar.silent=true", "/frontend/FrontendApplication.jar", "server", "/frontend/config.yml"]
 
+authentication:
+  image: java:8-jre
+  ports:
+   - "8082:8082"
+  volumes:
+   - docker/volume-authentication:/authentication
+   - docker/volume-log:/log
+  command: ["java", "-jar", "-Done-jar.silent=true", "/authentication/AuthenticationApplication.jar", "server", "/authentication/config.yml"]
+
 session:
   image: java:8-jre
   ports:
@@ -16,10 +25,12 @@ session:
    - docker/volume-log:/log
   command: ["java", "-jar", "-Done-jar.silent=true", "/session/SessionApplication.jar", "server", "/session/config.yml"]
 
+
 web:
   build: docker/image-nginx-lua/.
   links:
    - frontend
+   - authentication
    - session
   ports:
    - "8080:8080"
