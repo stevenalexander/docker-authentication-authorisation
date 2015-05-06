@@ -1,5 +1,7 @@
 frontend:
   image: java:8-jre
+  links:
+    - person
   ports:
    - "8081:8081"
   volumes:

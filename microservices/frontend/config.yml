@@ -17,3 +17,8 @@ logging:
     - type: file
       currentLogFilename: /log/frontend.log
       archive: false
+
+httpPersonClient:
+  timeout: 500ms
+
+personApiUri: http://person:8085/api/persons

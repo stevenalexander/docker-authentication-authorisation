@@ -1,5 +1,6 @@
 package com.example.frontend.resources;
 
+import com.example.frontend.services.PersonService;
 import com.example.frontend.views.IndexView;
 import com.example.frontend.views.LoginView;
 import com.example.frontend.views.PersonsView;
@@ -15,6 +16,12 @@ import javax.ws.rs.core.MediaType;
 @Produces({MediaType.TEXT_HTML})
 public class FrontendResource {
 
+    final PersonService personService;
+
+    public FrontendResource(PersonService personService) {
+        this.personService = personService;
+    }
+
     @GET
     public View index(@HeaderParam("callerId") String callerId){
         return new IndexView(callerId);
@@ -29,6 +36,8 @@ public class FrontendResource {
     @GET
     @Path("/persons")
     public View persons(@HeaderParam("callerId") String callerId){
-        return new PersonsView(callerId);
+        String persons = personService.getAll(callerId);
+
+        return new PersonsView(callerId, persons);
     }
 }

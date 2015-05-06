@@ -2,11 +2,14 @@ package com.example.frontend;
 
 import com.example.frontend.configuration.FrontendConfiguration;
 import com.example.frontend.resources.FrontendResource;
+import com.example.frontend.services.PersonService;
 import io.dropwizard.Application;
+import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 
+import javax.ws.rs.client.Client;
 import java.util.Map;
 
 public class FrontendApplication extends Application<FrontendConfiguration> {
@@ -31,7 +34,13 @@ public class FrontendApplication extends Application<FrontendConfiguration> {
 
     @Override
     public void run(FrontendConfiguration configuration, Environment environment) {
-        final FrontendResource frontendResource = new FrontendResource();
+        final Client personClient = new JerseyClientBuilder(environment)
+            .using(configuration.getHttpPersonClient())
+            .build("personClient");
+
+        final PersonService personService = new PersonService(personClient, configuration.getPersonApiUri());
+
+        final FrontendResource frontendResource = new FrontendResource(personService);
 
         environment.jersey().register(frontendResource);
     }
