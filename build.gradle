@@ -8,9 +8,14 @@ subprojects {
        mavenCentral()
     }
 
+
+    project.ext {
+        dropwizardVersion = '0.8.1'
+    }
+
     dependencies {
         compile (
-            'io.dropwizard:dropwizard-core:0.8.0'
+            'io.dropwizard:dropwizard-core:' + dropwizardVersion
         )
     }
 

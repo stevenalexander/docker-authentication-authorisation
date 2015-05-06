@@ -1,5 +1,7 @@
 package com.example.session.resources;
 
+import com.example.session.dao.SessionDao;
+import com.example.session.model.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,18 +12,39 @@ public class SessionResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SessionResource.class);
 
+    private final SessionDao sessionDao;
+
+    public SessionResource(SessionDao sessionDao) {
+        this.sessionDao = sessionDao;
+    }
+
     @POST
     public String createSession(String callerId) {
         LOGGER.info("Create session for callerId: " + callerId);
-        String accessToken = "1234";
-        return accessToken;
+
+        Session newSession = new Session(callerId);
+        sessionDao.insert(newSession);
+
+        return newSession.getAccessToken();
     }
 
     @GET
     @Path("/{accessToken}")
-    public String getSession(@PathParam("accessToken") String accessToken){
+    public String getSession(@PathParam("accessToken") String accessToken) {
         LOGGER.info("Validate session for accessToken: " + accessToken);
-        String callerId = "1"; // TODO break out accessToken and validate against session data store
-        return callerId;
+
+        Session session = sessionDao.findByAccessToken(accessToken);
+
+        if (session != null) {
+            return session.getCallerId();
+        }
+
+        throw new WebApplicationException("could not find accessToken", 404);
+    }
+
+    @DELETE
+    @Path("/{accessToken}")
+    public void deleteSession(@PathParam("accessToken") String accessToken) {
+        sessionDao.deleteByAccessToken(accessToken);
     }
 }

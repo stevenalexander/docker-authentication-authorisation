@@ -9,6 +9,13 @@ buildscript {
     }
 }
 
+dependencies {
+    compile (
+        'io.dropwizard:dropwizard-jdbi:' + dropwizardVersion,
+        'com.h2database:h2:1.4.187'
+    )
+}
+
 task oneJar(type: OneJar) {
     mainClass = 'com.example.session.SessionApplication'
     archiveName = 'SessionApplication.jar'
