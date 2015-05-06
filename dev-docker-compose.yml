@@ -25,6 +25,14 @@ session:
    - docker/volume-log:/log
   command: ["java", "-jar", "-Done-jar.silent=true", "/session/SessionApplication.jar", "server", "/session/config.yml"]
 
+person:
+  image: java:8-jre
+  ports:
+   - "8085:8085"
+  volumes:
+   - docker/volume-person:/person
+   - docker/volume-log:/log
+  command: ["java", "-jar", "-Done-jar.silent=true", "/person/PersonApplication.jar", "server", "/person/config.yml"]
 
 web:
   build: docker/image-nginx-lua/.
@@ -32,6 +40,7 @@ web:
    - frontend
    - authentication
    - session
+   - person
   ports:
    - "8080:8080"
   volumes:

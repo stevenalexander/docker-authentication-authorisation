@@ -9,11 +9,24 @@ buildscript {
     }
 }
 
+dependencies {
+    compile (
+            'io.dropwizard:dropwizard-jdbi:' + dropwizardVersion,
+            'com.h2database:h2:1.4.187'
+    )
+}
+
 task oneJar(type: OneJar) {
     mainClass = 'com.example.person.PersonApplication'
     archiveName = 'PersonApplication.jar'
 }
 
+task buildJar(type: Copy, dependsOn: oneJar) {
+    from 'config.yml'
+    from 'build/libs/PersonApplication.jar'
+    into '../../docker/volume-person'
+}
+
 artifacts {
-    oneJar
+    buildJar
 }
