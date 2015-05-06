@@ -1,10 +1,8 @@
 package com.example.frontend.views;
 
-import io.dropwizard.views.View;
+public class IndexView extends BaseView {
 
-public class IndexView extends View {
-
-    public IndexView() {
-        super("/templates/partials/index.ftl");
+    public IndexView(String callerId) {
+        super("/templates/partials/index.ftl", callerId);
     }
 }

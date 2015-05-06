@@ -1,10 +1,8 @@
 package com.example.frontend.views;
 
-import io.dropwizard.views.View;
+public class PersonsView extends BaseView {
 
-public class PersonsView extends View {
-
-    public PersonsView() {
-        super("/templates/partials/persons.ftl");
+    public PersonsView(String callerId) {
+        super("/templates/partials/persons.ftl", callerId);
     }
 }

@@ -45,6 +45,8 @@ public class SessionResource {
     @DELETE
     @Path("/{accessToken}")
     public void deleteSession(@PathParam("accessToken") String accessToken) {
+        LOGGER.info("Delete session for accessToken: " + accessToken);
+
         sessionDao.deleteByAccessToken(accessToken);
     }
 }
