@@ -1,7 +1,7 @@
 package com.example.person.resources;
 
+import com.example.api.model.Person;
 import com.example.person.dao.PersonDao;
-import com.example.person.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

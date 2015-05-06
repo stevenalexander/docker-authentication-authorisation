@@ -1,8 +1,12 @@
 package com.example.frontend.services;
 
+import com.example.api.model.Person;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 public class PersonService {
 
@@ -17,10 +21,10 @@ public class PersonService {
         this.personTarget = client.target(baseUri);
     }
 
-    public String getAll(String callerId) {
+    public List<Person> getAll(String callerId) {
         return personTarget
             .request(MediaType.APPLICATION_JSON)
             .header("callerId", callerId)
-            .get(String.class);
+            .get(new GenericType<List<Person>>() {});
     }
 }

@@ -11,8 +11,9 @@ buildscript {
 
 dependencies {
     compile (
-            'io.dropwizard:dropwizard-jdbi:' + dropwizardVersion,
-            'com.h2database:h2:1.4.187'
+        project(':microservices/api'),
+        'io.dropwizard:dropwizard-jdbi:' + dropwizardVersion,
+        'com.h2database:h2:1.4.187'
     )
 }
 

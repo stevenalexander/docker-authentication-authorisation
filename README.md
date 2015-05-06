@@ -27,14 +27,17 @@ VM.
 
 ### Microservices
 
+- [Api](tree/master/microservices/api) - API library containing objects used by multiple services (in best
+practise should be broken up into API specific versioned libraries for use in various clients, e.g. personApi,
+authorisationApi)
 - [Authentication](tree/master/microservices/authentication) - used to authenticate users against a set of stored
 credentials
-- [Session](tree/master/microservices/session) - used to create and validate sessions for authenticated users
 - [Authorisation](tree/master/microservices/authorisation) - used to check authenticated users permissions to perform
 actions
+- [Frontend](tree/master/microservices/frontend) - HTML UI wrapper for the login/person functionality
 - [Person](tree/master/microservices/person) - used to retrieve and update person details, with the actions a user can
 perform controlled by the Authorisation application
-- [Frontend](tree/master/microservices/frontend) - HTML UI wrapper for the login/person functionality
+- [Session](tree/master/microservices/session) - used to create and validate sessions for authenticated users
 
 ### Development architecture
 

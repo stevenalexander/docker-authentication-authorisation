@@ -1,6 +1,6 @@
 package com.example.person.dao.mapper;
 
-import com.example.person.model.Person;
+import com.example.api.model.Person;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 

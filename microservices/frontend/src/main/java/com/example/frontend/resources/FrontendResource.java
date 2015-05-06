@@ -1,5 +1,6 @@
 package com.example.frontend.resources;
 
+import com.example.api.model.Person;
 import com.example.frontend.services.PersonService;
 import com.example.frontend.views.IndexView;
 import com.example.frontend.views.LoginView;
@@ -11,6 +12,7 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/")
 @Produces({MediaType.TEXT_HTML})
@@ -36,7 +38,7 @@ public class FrontendResource {
     @GET
     @Path("/persons")
     public View persons(@HeaderParam("callerId") String callerId){
-        String persons = personService.getAll(callerId);
+        List<Person> persons = personService.getAll(callerId);
 
         return new PersonsView(callerId, persons);
     }

@@ -1,1 +1,1 @@
-include "microservices/authentication", "microservices/authorisation", "microservices/session", "microservices/person", "microservices/frontend"
+include "microservices/api", "microservices/authentication", "microservices/authorisation", "microservices/session", "microservices/person", "microservices/frontend"

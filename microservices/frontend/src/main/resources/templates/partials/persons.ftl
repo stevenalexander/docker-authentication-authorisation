@@ -3,5 +3,12 @@
 
 <h1>Persons</h1>
 
-<p>${persons}</p>
+<#if persons?has_content>
+<ul>
+<#list persons as person>
+  <li>${person.firstName} ${person.lastName}</li>
+</#list>
+</ul>
+</#if>
+
 </#macro>

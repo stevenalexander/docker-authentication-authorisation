@@ -1,14 +1,18 @@
 package com.example.frontend.views;
 
+import com.example.api.model.Person;
+
+import java.util.List;
+
 public class PersonsView extends BaseView {
 
-    String persons;
+    List<Person> persons;
 
-    public String getPersons() {
+    public List<Person> getPersons() {
         return persons;
     }
 
-    public PersonsView(String callerId, String persons) {
+    public PersonsView(String callerId, List<Person> persons) {
         super("/templates/partials/persons.ftl", callerId);
         this.persons = persons;
     }

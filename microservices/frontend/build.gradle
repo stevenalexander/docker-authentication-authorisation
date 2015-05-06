@@ -11,6 +11,7 @@ buildscript {
 
 dependencies {
     compile (
+        project(':microservices/api'),
         'io.dropwizard:dropwizard-client:' + dropwizardVersion,
         'io.dropwizard:dropwizard-views:' + dropwizardVersion,
         'io.dropwizard:dropwizard-views-freemarker:' + dropwizardVersion

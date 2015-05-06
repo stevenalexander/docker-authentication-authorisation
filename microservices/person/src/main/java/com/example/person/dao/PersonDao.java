@@ -1,7 +1,7 @@
 package com.example.person.dao;
 
+import com.example.api.model.Person;
 import com.example.person.dao.mapper.PersonMapper;
-import com.example.person.model.Person;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
