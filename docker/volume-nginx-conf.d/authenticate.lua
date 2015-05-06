@@ -3,7 +3,7 @@ ngx.log(ngx.NOTICE, 'BEGIN authenticate.lua')
 
 -- Call Authentication microservice to check users credentials
 ngx.req.read_body()
-local authenticationResult = ngx.location.capture('/authentication', { method = ngx.HTTP_POST, always_forward_body = true  })
+local authenticationResult = ngx.location.capture('/api/authentication', { method = ngx.HTTP_POST, always_forward_body = true  })
 
 if authenticationResult.status ~= ngx.HTTP_OK then
   ngx.log(ngx.WARN, 'Rejected authentication attempt. Status :' .. authenticationResult.status)
@@ -23,7 +23,7 @@ ngx.req.clear_header('content-type')
 ngx.header["content-type"] = 'text/plain'
 
 -- Call Session microservice to create a new session for the authenticated user
-local sessionPostResult = ngx.location.capture('/sessions', {method = ngx.HTTP_POST, body = callerId})
+local sessionPostResult = ngx.location.capture('/api/sessions', {method = ngx.HTTP_POST, body = callerId})
 
 if sessionPostResult.status ~= ngx.HTTP_OK then
 	ngx.log(ngx.ERR, 'Failed to acquire new session token from Session microservice. Status : ' .. sessionPostResult.status)

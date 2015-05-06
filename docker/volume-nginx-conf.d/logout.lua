@@ -11,7 +11,7 @@ ngx.log(ngx.INFO, 'accessToken: ' .. accessToken)
 
 ngx.req.clear_header("Accept-Encoding")
 
-local sessionsDeleteResult = ngx.location.capture('/sessions/' .. accessToken, { method = ngx.HTTP_DELETE });
+local sessionsDeleteResult = ngx.location.capture('/api/sessions/' .. accessToken, { method = ngx.HTTP_DELETE });
 
 if sessionsDeleteResult.status ~= 204 then
   ngx.log(ngx.WARN, 'Nginx was unable to delete '.. accessToken ..' from Sessions microservice')

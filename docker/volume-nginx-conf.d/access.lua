@@ -24,7 +24,7 @@ ngx.log(ngx.INFO, 'accessToken: ' .. accessToken)
 local acceptEncodingHeaderTemp = ngx.req.get_headers()["Accept-Encoding"]
 ngx.req.clear_header("Accept-Encoding")
 
-local sessionsResult = ngx.location.capture('/sessions/' .. accessToken, { method = ngx.HTTP_GET });
+local sessionsResult = ngx.location.capture('/api/sessions/' .. accessToken, { method = ngx.HTTP_GET });
 local callerId = sessionsResult.body;
 ngx.req.set_header('Accept-Encoding', acceptEncodingHeaderTemp)
 

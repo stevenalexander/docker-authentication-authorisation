@@ -1,6 +1,6 @@
 server:
   type: simple
-  applicationContextPath: /
+  applicationContextPath: /api
   adminContextPath: /admin
   connector:
     type: http
