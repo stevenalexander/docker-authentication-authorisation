@@ -43,5 +43,6 @@ public class FrontendApplication extends Application<FrontendConfiguration> {
         final FrontendResource frontendResource = new FrontendResource(personService);
 
         environment.jersey().register(frontendResource);
+        environment.jersey().register(new FrontendExceptionMapper());
     }
 }

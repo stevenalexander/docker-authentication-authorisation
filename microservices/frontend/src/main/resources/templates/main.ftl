@@ -20,7 +20,7 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse" style="border-radius: 0;">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -32,11 +32,13 @@
           <a class="navbar-brand" href="/">Authentication and Authorisation</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-<#if (callerId)?has_content>
           <form class="navbar-form navbar-right" method="POST" action="/logout">
-            <button type="submit" class="btn btn-success">Logout</button>
-          </form>
+<#if (callerId)?has_content>
+            <button type="submit" class="btn btn-fail">Logout</button>
+<#else>
+            <a class="btn btn-success" href="/login" role="button">Login</a>
 </#if>
+          </form>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>

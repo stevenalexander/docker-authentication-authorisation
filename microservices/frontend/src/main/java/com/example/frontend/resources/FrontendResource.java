@@ -42,14 +42,13 @@ public class FrontendResource {
         LOGGER.info("Getting persons list for callerId: " + callerId);
 
         List<Person> persons = personService.getAll(callerId);
-
         return new PersonsView(callerId, persons);
     }
 
     @GET
     @Path("/persons/add")
     public View personsAdd(@HeaderParam("callerId") String callerId){
-        return new PersonEditView(callerId, null, true);
+        return new PersonEditView(callerId, null, true, null);
     }
 
     @POST
@@ -60,7 +59,11 @@ public class FrontendResource {
 
         Person person = new Person(firstName, lastName);
         // in real application validation would occur here, api errors caught and return view with errors
-        personService.post(callerId, person);
+        try {
+            personService.post(callerId, person);
+        } catch (NotAuthorizedException notAuthorizedException) {
+            return new PersonEditView(callerId, person, true, new String[] { "notAuthorised" });
+        }
 
         throw new WebApplicationException(Response.seeOther(UriBuilder.fromUri("/persons").build()).build());
     }
@@ -78,7 +81,7 @@ public class FrontendResource {
     public View personEdit(@HeaderParam("callerId") String callerId, @PathParam("personId") int personId) {
         Person person = personService.get(callerId, personId);
 
-        return new PersonEditView(callerId, person, false);
+        return new PersonEditView(callerId, person, false, null);
     }
 
     @POST
@@ -90,8 +93,18 @@ public class FrontendResource {
         Person person = new Person(firstName, lastName);
         person.setId(personId);
         // in real application validation would occur here, api errors caught and return view with errors
-        personService.put(callerId, person);
+        try {
+            personService.put(callerId, person);
+        } catch (NotAuthorizedException notAuthorizedException) {
+            return new PersonEditView(callerId, person, true, new String[] { "notAuthorised" });
+        }
 
         throw new WebApplicationException(Response.seeOther(UriBuilder.fromUri("/persons/" + personId).build()).build());
+    }
+
+    @GET
+    @Path("/401")
+    public View get401() {
+        return new ErrorView("/templates/partials/401.ftl");
     }
 }

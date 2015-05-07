@@ -6,6 +6,7 @@ public class PersonEditView extends BaseView {
 
     Person person;
     boolean isNew;
+    String[] errors = null;
 
     public Person getPerson() {
         return person;
@@ -15,9 +16,14 @@ public class PersonEditView extends BaseView {
         return isNew;
     }
 
-    public PersonEditView(String callerId, Person person, boolean isNew) {
+    public String[] getErrors() {
+        return errors;
+    }
+
+    public PersonEditView(String callerId, Person person, boolean isNew, String[] errors) {
         super("/templates/partials/personEdit.ftl", callerId);
         this.person = person;
         this.isNew = isNew;
+        this.errors = errors;
     }
 }

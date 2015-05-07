@@ -53,7 +53,7 @@ public class AuthorisationFilter implements ContainerRequestFilter {
             .header("callerId", callerId)
             .get();
 
-        if (response.getStatus() == 404) {
+        if (response.getStatus() != 200) {
             requestContext.abortWith(Response
                 .status(Response.Status.UNAUTHORIZED)
                 .entity("You do not have required permission: " + permission)

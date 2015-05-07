@@ -22,9 +22,9 @@ public class AuthorisationResource {
         // in real application this is where persisted RBAC would queried
         switch (permission) {
             case "personView"  : callerHasPermission = true; break;
-            case "personEdit"  : callerHasPermission = callerId.equals("1") ? true : false; break; // Only admin can edit/add/delete persons
-            case "personAdd"   : callerHasPermission = callerId.equals("1") ? true : false; break;
-            case "personDelete": callerHasPermission = callerId.equals("1") ? true : false; break;
+            case "personEdit"  : callerHasPermission = "1".equals(callerId) ? true : false; break; // Only admin can edit/add/delete persons
+            case "personAdd"   : callerHasPermission = "1".equals(callerId) ? true : false; break;
+            case "personDelete": callerHasPermission = "1".equals(callerId) ? true : false; break;
         }
 
         if (callerHasPermission) {
