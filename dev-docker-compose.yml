@@ -18,6 +18,15 @@ authentication:
    - docker/volume-log:/log
   command: ["java", "-jar", "-Done-jar.silent=true", "/authentication/AuthenticationApplication.jar", "server", "/authentication/config.yml"]
 
+authorisation:
+  image: java:8-jre
+  ports:
+   - "8083:8083"
+  volumes:
+   - docker/volume-authorisation:/authorisation
+   - docker/volume-log:/log
+  command: ["java", "-jar", "-Done-jar.silent=true", "/authorisation/AuthorisationApplication.jar", "server", "/authorisation/config.yml"]
+
 session:
   image: java:8-jre
   ports:
@@ -29,6 +38,8 @@ session:
 
 person:
   image: java:8-jre
+  links:
+     - authorisation
   ports:
    - "8085:8085"
   volumes:

@@ -5,3 +5,10 @@ server:
   connector:
     type: http
     port: 8083
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: /log/authorisation.log
+      archive: false
