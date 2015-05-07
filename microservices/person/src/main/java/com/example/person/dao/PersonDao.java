@@ -25,7 +25,7 @@ public interface PersonDao {
     @SqlUpdate("delete from PERSON where ID = :id")
     int deleteById(@Bind("id") int id);
 
-    @SqlUpdate("update into PERSON set FIRSTNAME = :firstName, LASTNAME = :lastName where ID = :id")
+    @SqlUpdate("update PERSON set FIRSTNAME = :firstName, LASTNAME = :lastName where ID = :id")
     int update(@BindBean Person person);
 
     @SqlUpdate("insert into PERSON (FIRSTNAME, LASTNAME) values (:firstName, :lastName)")

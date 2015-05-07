@@ -3,6 +3,7 @@ package com.example.frontend.services;
 import com.example.api.model.Person;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -34,5 +35,20 @@ public class PersonService {
             .request(MediaType.APPLICATION_JSON)
             .header("callerId", callerId)
             .get(Person.class);
+    }
+
+    public Person post(String callerId, Person person) {
+        return personTarget
+            .request(MediaType.APPLICATION_JSON)
+            .header("callerId", callerId)
+            .post(Entity.entity(person, MediaType.APPLICATION_JSON), Person.class);
+    }
+
+    public Person put(String callerId, Person person) {
+        return personTarget
+            .path("/" + person.getId())
+            .request(MediaType.APPLICATION_JSON)
+            .header("callerId", callerId)
+            .put(Entity.entity(person, MediaType.APPLICATION_JSON), Person.class);
     }
 }

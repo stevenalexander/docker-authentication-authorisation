@@ -4,14 +4,20 @@ import com.example.api.model.Person;
 import com.example.frontend.services.PersonService;
 import com.example.frontend.views.*;
 import io.dropwizard.views.View;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 import java.util.List;
 
 @Path("/")
 @Produces({MediaType.TEXT_HTML})
 public class FrontendResource {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FrontendResource.class);
 
     final PersonService personService;
 
@@ -33,6 +39,8 @@ public class FrontendResource {
     @GET
     @Path("/persons")
     public View persons(@HeaderParam("callerId") String callerId){
+        LOGGER.info("Getting persons list for callerId: " + callerId);
+
         List<Person> persons = personService.getAll(callerId);
 
         return new PersonsView(callerId, persons);
@@ -44,9 +52,22 @@ public class FrontendResource {
         return new PersonEditView(callerId, null, true);
     }
 
+    @POST
+    @Path("/persons/add")
+    public View personsAddSubmit(@HeaderParam("callerId") String callerId,
+                                 @FormParam("firstName") String firstName, @FormParam("lastName") String lastName) {
+        LOGGER.info("Adding person for callerId: " + callerId);
+
+        Person person = new Person(firstName, lastName);
+        // in real application validation would occur here, api errors caught and return view with errors
+        personService.post(callerId, person);
+
+        throw new WebApplicationException(Response.seeOther(UriBuilder.fromUri("/persons").build()).build());
+    }
+
     @GET
     @Path("/persons/{personId}")
-    public View getPerson(@HeaderParam("callerId") String callerId, @PathParam("personId") int personId){
+    public View getPerson(@HeaderParam("callerId") String callerId, @PathParam("personId") int personId) {
         Person person = personService.get(callerId, personId);
 
         return new PersonView(callerId, person);
@@ -54,9 +75,23 @@ public class FrontendResource {
 
     @GET
     @Path("/persons/{personId}/edit")
-    public View personsAdd(@HeaderParam("callerId") String callerId, @PathParam("personId") int personId){
+    public View personEdit(@HeaderParam("callerId") String callerId, @PathParam("personId") int personId) {
         Person person = personService.get(callerId, personId);
 
         return new PersonEditView(callerId, person, false);
+    }
+
+    @POST
+    @Path("/persons/{personId}/edit")
+    public View personEditSubmit(@HeaderParam("callerId") String callerId, @PathParam("personId") int personId,
+                                 @FormParam("firstName") String firstName, @FormParam("lastName") String lastName) {
+        LOGGER.info("Updating person for callerId: " + callerId);
+
+        Person person = new Person(firstName, lastName);
+        person.setId(personId);
+        // in real application validation would occur here, api errors caught and return view with errors
+        personService.put(callerId, person);
+
+        throw new WebApplicationException(Response.seeOther(UriBuilder.fromUri("/persons/" + personId).build()).build());
     }
 }
