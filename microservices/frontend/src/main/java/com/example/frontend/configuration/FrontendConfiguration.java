@@ -23,7 +23,6 @@ public class FrontendConfiguration extends Configuration {
     @JsonProperty("httpPersonClient")
     private JerseyClientConfiguration httpPersonClient = new JerseyClientConfiguration();
 
-
     public JerseyClientConfiguration getHttpPersonClient() {
         return httpPersonClient;
     }

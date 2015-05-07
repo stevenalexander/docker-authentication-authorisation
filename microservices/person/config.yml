@@ -29,3 +29,8 @@ database:
   checkConnectionWhileIdle: false
   evictionInterval: 10s
   minIdleTime: 1 minute
+
+httpAuthorisationClient:
+  timeout: 500ms
+
+authorisationApiUri: http://authorisation:8083/api/authorisations

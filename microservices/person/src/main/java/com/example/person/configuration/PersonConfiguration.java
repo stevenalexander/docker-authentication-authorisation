@@ -2,6 +2,7 @@ package com.example.person.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import io.dropwizard.client.JerseyClientConfiguration;
 import io.dropwizard.db.DataSourceFactory;
 
 import javax.validation.Valid;
@@ -24,5 +25,22 @@ public class PersonConfiguration extends Configuration {
 
     public DataSourceFactory getDataSourceFactory() {
         return database;
+    }
+    
+    @Valid
+    @NotNull
+    @JsonProperty("httpAuthorisationClient")
+    private JerseyClientConfiguration httpAuthorisationClient = new JerseyClientConfiguration();
+
+    public JerseyClientConfiguration getHttpAuthorisationClient() {
+        return httpAuthorisationClient;
+    }
+
+    @NotNull
+    @JsonProperty("authorisationApiUri")
+    private String authorisationApiUri;
+
+    public String getAuthorisationApiUri() {
+        return authorisationApiUri;
     }
 }

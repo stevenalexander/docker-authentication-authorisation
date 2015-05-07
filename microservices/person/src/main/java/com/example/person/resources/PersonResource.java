@@ -2,6 +2,7 @@ package com.example.person.resources;
 
 import com.example.api.model.Person;
 import com.example.person.dao.PersonDao;
+import com.example.person.filters.annotations.Secured;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +25,7 @@ public class PersonResource {
     }
 
     @GET
+    @Secured(permission = "personView")
     public List<Person> getAll(@HeaderParam("callerId") String callerId){
         LOGGER.info("Retrieving all persons for callerId: " + callerId);
 
@@ -32,6 +34,7 @@ public class PersonResource {
 
     @GET
     @Path("/{id}")
+    @Secured(permission = "personView")
     public Person get(@HeaderParam("callerId") String callerId, @PathParam("id") Integer id){
         LOGGER.info("Retrieving person" + id + " for callerId: " + callerId);
 
@@ -39,6 +42,7 @@ public class PersonResource {
     }
 
     @POST
+    @Secured(permission = "personAdd")
     public Person add(@HeaderParam("callerId") String callerId, @Valid Person person) {
         LOGGER.info("Adding a person for callerId: " + callerId);
 
@@ -49,8 +53,9 @@ public class PersonResource {
 
     @PUT
     @Path("/{id}")
-    public Person update(@HeaderParam("callerId") String callerId, @PathParam("id") Integer id, @Valid Person person) {
-        LOGGER.info("Adding person " + id + " for callerId: " + callerId);
+    @Secured(permission = "personEdit")
+    public Person edit(@HeaderParam("callerId") String callerId, @PathParam("id") Integer id, @Valid Person person) {
+        LOGGER.info("Editing person " + id + " for callerId: " + callerId);
 
         person.setId(id);
         personDao.update(person);
@@ -60,6 +65,7 @@ public class PersonResource {
 
     @DELETE
     @Path("/{id}")
+    @Secured(permission = "personDelete")
     public void delete(@HeaderParam("callerId") String callerId, @PathParam("id") Integer id) {
         LOGGER.info("Deleting person " + id + " for callerId: " + callerId);
         personDao.deleteById(id);
