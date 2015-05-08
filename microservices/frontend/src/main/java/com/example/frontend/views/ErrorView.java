@@ -1,10 +1,8 @@
 package com.example.frontend.views;
 
-import io.dropwizard.views.View;
+public class ErrorView extends BaseView {
 
-public class ErrorView extends View {
-
-    public ErrorView(String template) {
-        super(template);
+    public ErrorView(String template, String callerId) {
+        super(template, callerId);
     }
 }

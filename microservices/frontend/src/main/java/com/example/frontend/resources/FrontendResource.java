@@ -104,7 +104,7 @@ public class FrontendResource {
 
     @GET
     @Path("/401")
-    public View get401() {
-        return new ErrorView("/templates/partials/401.ftl");
+    public View get401(@HeaderParam("callerId") String callerId) {
+        return new ErrorView("/templates/partials/401.ftl", callerId);
     }
 }

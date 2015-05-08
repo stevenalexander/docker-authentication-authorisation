@@ -34,7 +34,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" method="POST" action="/logout">
 <#if (callerId)?has_content>
-            <button type="submit" class="btn btn-fail">Logout</button>
+            <button type="submit" class="btn btn-danger">Logout</button>
 <#else>
             <a class="btn btn-success" href="/login" role="button">Login</a>
 </#if>

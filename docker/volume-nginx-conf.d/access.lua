@@ -1,7 +1,9 @@
 
 -- Check against list of non-protected endpoints
 if  string.find(ngx.var.uri, "^/login$") or
-	  string.find(ngx.var.uri, "^/logout$") then
+	  string.find(ngx.var.uri, "^/logout$") or
+    string.find(ngx.var.uri, "^/401$") or
+    string.find(ngx.var.uri, "^/404$") then
 	  return
 end
 
