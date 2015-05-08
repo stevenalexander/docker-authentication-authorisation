@@ -19,6 +19,6 @@ logging:
       archive: false
 
 httpPersonClient:
-  timeout: 500ms
+  timeout: 1000ms
 
 personApiUri: http://person:8085/api/persons
