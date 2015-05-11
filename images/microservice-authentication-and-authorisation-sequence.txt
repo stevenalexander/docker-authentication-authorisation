@@ -1,0 +1,51 @@
+title Microservice authentication and authorisation architecture
+
+User->Nginx: GET /login
+note right of Nginx: access.lua
+Nginx->Frontend: GET /login
+Frontend-->User:
+
+User->+Nginx: POST /login
+note right of Nginx: auth.lua
+Nginx->Authentication: POST /api/authentication
+Authentication-->Nginx: 200
+Nginx->Session: POST /api/session
+Session-->Nginx: 200 with accessToken
+Nginx-->-User: 302 Response with accessToken cookie
+
+
+loop Authenticated requests
+  User->Nginx: Request with accessToken cookie
+  note right of Nginx: access.lua
+  Nginx->Session: Validate accessToken
+  Session-->Nginx: 200 with callerId
+  Nginx->Frontend: Request with callerId
+  Frontend->Person: Get Data with callerId
+  Person->Authorisation: GET with callerId\n/api/authorisation/$action
+  Authorisation-->Person: 200
+  Person-->Frontend: 200
+  Frontend-->User: 200
+end
+
+
+alt Unauthenticated/Invalid/Expired session
+  User->Nginx: Invalid request
+  note right of Nginx: access.lua
+  Nginx->Session: Validate accessToken
+  Session-->Nginx: 404
+  Nginx-->User: 401
+end
+
+
+alt Unauthorised request
+  User->Nginx: Request with accessToken cookie
+  note right of Nginx: access.lua
+  Nginx->Session: Validate accessToken
+  Session-->Nginx: 200 with callerId
+  Nginx->Frontend: Request with callerId
+  Frontend->Person: Get Data with callerId
+  Person->Authorisation: GET with callerId\n/api/authorisation/$action
+  Authorisation-->Person: 404
+  Person-->Frontend: 401
+  Frontend-->User: 401 with permission errors
+end
