@@ -2,7 +2,7 @@
 
 Steps to create a custom Nginx instance with Lua scripting running on a Kubernetes cluster with a single Pod.
 
-Serves as a simple example of how to create and publish a custom docker image to
+Serves as a simple example of how to create and publish a custom docker image to the [Google Container Registry](https://cloud.google.com/tools/container-registry/).
 
 Requires:
 * [Google Cloud](https://cloud.google.com/) account (free trial needs payment details)
