@@ -148,3 +148,7 @@ I would like a chance to use some sort of containerisation in a real project and
 development side, operations for deployment in environment and in actual production use. For now I'd definitely
 recommend developers to try it out for defining and running their local development environments as an alternative to
 complex boxen/vagrant setups.
+
+## Additions
+
+- [Publishing a custom docker image to Google private repository and running in a cluster as a single pod](https://github.com/stevenalexander/docker-authentication-authorisation/blob/master/kubernetes-nginx-lua.md)
