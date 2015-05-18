@@ -14,7 +14,8 @@ dependencies {
         project(':microservices/api'),
         'io.dropwizard:dropwizard-client:' + dropwizardVersion,
         'io.dropwizard:dropwizard-jdbi:' + dropwizardVersion,
-        'com.h2database:h2:1.4.187'
+        'com.h2database:h2:1.4.187',
+        'mysql:mysql-connector-java:5.1.35'
     )
 }
 

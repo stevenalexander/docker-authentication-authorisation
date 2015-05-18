@@ -11,7 +11,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 @RegisterMapper(SessionMapper.class)
 public interface SessionDao {
 
-    @SqlUpdate("drop table if exists SESSION; create table SESSION(ACCESSTOKEN VARCHAR(50) PRIMARY KEY, CALLERID VARCHAR(50));")
+    @SqlUpdate("create table SESSION(ACCESSTOKEN VARCHAR(50) PRIMARY KEY, CALLERID VARCHAR(50));")
     void createTable();
 
     @SqlQuery("select * from SESSION where ACCESSTOKEN = :accessToken")

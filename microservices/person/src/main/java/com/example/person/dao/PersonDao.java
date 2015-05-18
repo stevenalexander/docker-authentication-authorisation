@@ -13,7 +13,7 @@ import java.util.List;
 @RegisterMapper(PersonMapper.class)
 public interface PersonDao {
 
-    @SqlUpdate("drop table if exists PERSON; create table PERSON(ID INT PRIMARY KEY auto_increment, FIRSTNAME VARCHAR(50), LASTNAME VARCHAR(50));")
+    @SqlUpdate("create table PERSON(ID INT PRIMARY KEY auto_increment, FIRSTNAME VARCHAR(50), LASTNAME VARCHAR(50));")
     void createTable();
 
     @SqlQuery("select * from PERSON")

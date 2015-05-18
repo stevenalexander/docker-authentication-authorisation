@@ -8,8 +8,12 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.jdbi.DBIFactory;
 import org.skife.jdbi.v2.DBI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SessionApplication extends Application<SessionConfiguration> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SessionApplication.class);
 
     public static void main(String[] args) throws Exception {
         new SessionApplication().run(args);
@@ -33,9 +37,10 @@ public class SessionApplication extends Application<SessionConfiguration> {
 
         final SessionDao sessionDao = jdbi.onDemand(SessionDao.class);
 
-        // Create table if running H2 embedded DB
-        if (sessionConfiguration.getDatabaseName().equalsIgnoreCase("h2")) {
+        try {
             sessionDao.createTable();
+        } catch (Exception ex) {
+            LOGGER.info("Session table already exists");
         }
 
         final SessionResource sessionResource = new SessionResource(sessionDao);

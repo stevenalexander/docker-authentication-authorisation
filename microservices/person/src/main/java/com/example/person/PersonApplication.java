@@ -10,10 +10,15 @@ import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.DBI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.client.Client;
 
 public class PersonApplication extends Application<PersonConfiguration> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonApplication.class);
+
     public static void main(String[] args) throws Exception {
         new PersonApplication().run(args);
     }
@@ -36,9 +41,10 @@ public class PersonApplication extends Application<PersonConfiguration> {
 
         final PersonDao personDao = jdbi.onDemand(PersonDao.class);
 
-        // Create table if running H2 embedded DB
-        if (configuration.getDatabaseName().equalsIgnoreCase("h2")) {
+        try {
             personDao.createTable();
+        } catch (Exception ex) {
+            LOGGER.info("Person table already exists");
         }
 
         final PersonResource PersonResource = new PersonResource(personDao);
