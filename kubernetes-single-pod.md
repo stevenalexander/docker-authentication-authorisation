@@ -94,7 +94,7 @@ gcloud compute firewall-rules delete k8s-ms-auth-node-80
 
 This architecture is a single [pod](https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/pods.md) running
 on a single node with all the components. It's basically the same as running it locally for development and doesn't
-offer any horizontal scales. Didn't require much changes to the configuration, only updating server names to localhost
+offer any horizontal scaling. Didn't require much changes to the configuration, only updating server names to localhost
 (containers in a pod can address each other locally). It could be scaled by creating a data persistence pod for a
 database, updating config to point all the services which need persistence at it, then placing a load balancer in front
 of the pod and creating multiple nodes hosting the web/data persistence pod.
