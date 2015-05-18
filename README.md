@@ -151,4 +151,7 @@ complex boxen/vagrant setups.
 
 ## Additions
 
+### Google Cloud with Kubernetes
+
 - [Publishing a custom docker image to Google private repository and running in a cluster as a single pod](https://github.com/stevenalexander/docker-authentication-authorisation/blob/master/kubernetes-nginx-lua.md)
+- [Running the solution as a single pod](https://github.com/stevenalexander/docker-authentication-authorisation/blob/master/kubernetes-single-pod.md)
