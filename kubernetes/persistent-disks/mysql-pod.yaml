@@ -1,0 +1,29 @@
+kind: Pod
+apiVersion: v1beta1
+id: session-mysql
+desiredState:
+  manifest:
+    version: v1beta1
+    id: mysql
+    containers:
+      - name: session-mysql
+        image: mysql
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: root
+          - name: MYSQL_DATABASE
+            value: session
+        cpu: 100
+        ports:
+          - containerPort: 3306
+        volumeMounts:
+          - name: mysql-persistent-storage
+            mountPath: /var/lib/mysql
+    volumes:
+      - name: mysql-persistent-storage
+        source:
+          persistentDisk:
+            pdName: persistent-disks-session-mysql-disk
+            fsType: ext4
+labels:
+  name: session-mysql

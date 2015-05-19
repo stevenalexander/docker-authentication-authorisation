@@ -1,0 +1,15 @@
+kind: Pod
+apiVersion: v1beta1
+id: session
+desiredState:
+  manifest:
+    version: v1beta1
+    id: session
+    containers:
+      - name: session
+        image: "gcr.io/carbide-ground-94313/persistent-disks-session"
+        ports:
+          - containerPort: 8084
+            hostPort: 80
+labels:
+  name: session
