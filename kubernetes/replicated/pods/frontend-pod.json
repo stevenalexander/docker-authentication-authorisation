@@ -1,0 +1,26 @@
+{
+  "id": "frontend-controller",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "replicas": 3,
+    "replicaSelector": {"name": "frontend"},
+    "podTemplate": {
+      "desiredState": {
+        "manifest": {
+          "version": "v1beta1",
+          "id": "frontend-controller",
+          "containers": [{
+            "name": "frontend",
+            "image": "gcr.io/carbide-ground-94313/replicated-frontend",
+            "cpu": 100,
+            "memory": 50000000,
+            "ports": [{"name": "http-server", "containerPort": 8081, "hostPort": 8081}]
+          }]
+        }
+      },
+      "labels": { "name": "frontend" }
+    }
+  },
+  "labels": {"name": "frontend"}
+}

@@ -1,0 +1,9 @@
+{
+  "apiVersion": "v1beta1",
+  "kind": "Service",
+  "id": "frontend",
+  "port": 8081,
+  "containerPort": "http-server",
+  "selector": { "name": "frontend" },
+  "labels": {"name": "frontend"}
+}

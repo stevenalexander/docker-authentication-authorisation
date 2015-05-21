@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1beta1
+id: person-mysql
+port: 3306
+selector:
+  name: person-mysql
+containerPort: 3306
+labels:
+  name: person-mysql

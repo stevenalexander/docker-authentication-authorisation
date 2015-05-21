@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1beta1
+id: session-mysql
+port: 3306
+selector:
+  name: session-mysql
+containerPort: 3306
+labels:
+  name: session-mysql

@@ -1,0 +1,26 @@
+{
+  "id": "person-controller",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "replicas": 3,
+    "replicaSelector": {"name": "person"},
+    "podTemplate": {
+      "desiredState": {
+        "manifest": {
+          "version": "v1beta1",
+          "id": "person-controller",
+          "containers": [{
+            "name": "person",
+            "image": "gcr.io/carbide-ground-94313/replicated-person",
+            "cpu": 100,
+            "memory": 50000000,
+            "ports": [{"name": "http-server", "containerPort": 8085, "hostPort": 8085}]
+          }]
+        }
+      },
+      "labels": { "name": "person" }
+    }
+  },
+  "labels": {"name": "person"}
+}

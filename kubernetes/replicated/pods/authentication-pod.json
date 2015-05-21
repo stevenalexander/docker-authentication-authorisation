@@ -1,0 +1,26 @@
+{
+  "id": "authentication-controller",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "replicas": 3,
+    "replicaSelector": {"name": "authentication"},
+    "podTemplate": {
+      "desiredState": {
+        "manifest": {
+          "version": "v1beta1",
+          "id": "authentication-controller",
+          "containers": [{
+            "name": "authentication",
+            "image": "gcr.io/carbide-ground-94313/replicated-authentication",
+            "cpu": 100,
+            "memory": 50000000,
+            "ports": [{"name": "http-server", "containerPort": 8082, "hostPort": 8082}]
+          }]
+        }
+      },
+      "labels": { "name": "authentication" }
+    }
+  },
+  "labels": {"name": "authentication"}
+}

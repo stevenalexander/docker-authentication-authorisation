@@ -1,0 +1,27 @@
+{
+  "id": "nginx-lua-controller",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "replicas": 3,
+    "replicaSelector": {"name": "nginx-lua"},
+    "podTemplate": {
+      "desiredState": {
+        "manifest": {
+          "version": "v1beta1",
+          "id": "nginx-lua-controller",
+          "containers": [{
+            "name": "nginx-lua",
+            "image": "gcr.io/carbide-ground-94313/replicated-nginx-lua",
+            "cpu": 100,
+            "memory": 50000000,
+            "ports": [{"name": "http-server", "containerPort": 8080, "hostPort": 80}]
+          }]
+        }
+      },
+      "labels": { "name": "nginx-lua" }
+    }
+  },
+  "labels": {"name": "nginx-lua"}
+}
+

@@ -1,0 +1,9 @@
+{
+  "apiVersion": "v1beta1",
+  "kind": "Service",
+  "id": "person",
+  "port": 8085,
+  "containerPort": "http-server",
+  "selector": { "name": "person" },
+  "labels": {"name": "person"}
+}

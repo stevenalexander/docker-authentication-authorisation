@@ -1,0 +1,10 @@
+{
+  "apiVersion": "v1beta1",
+  "kind": "Service",
+  "id": "nginx-lua",
+  "port": 80,
+  "containerPort": "http-server",
+  "selector": { "name": "nginx-lua" },
+  "createExternalLoadBalancer": true,
+  "labels": {"name": "nginx-lua"}
+}

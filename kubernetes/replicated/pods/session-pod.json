@@ -1,0 +1,26 @@
+{
+  "id": "session-controller",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "replicas": 3,
+    "replicaSelector": {"name": "session"},
+    "podTemplate": {
+      "desiredState": {
+        "manifest": {
+          "version": "v1beta1",
+          "id": "session-controller",
+          "containers": [{
+            "name": "session",
+            "image": "gcr.io/carbide-ground-94313/replicated-session",
+            "cpu": 100,
+            "memory": 50000000,
+            "ports": [{"name": "http-server", "containerPort": 8084, "hostPort": 8084}]
+          }]
+        }
+      },
+      "labels": { "name": "session" }
+    }
+  },
+  "labels": {"name": "session"}
+}

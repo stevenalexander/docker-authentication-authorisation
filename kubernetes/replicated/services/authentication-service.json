@@ -1,0 +1,9 @@
+{
+  "apiVersion": "v1beta1",
+  "kind": "Service",
+  "id": "authentication",
+  "port": 8082,
+  "containerPort": "http-server",
+  "selector": { "name": "authentication" },
+  "labels": {"name": "authentication"}
+}

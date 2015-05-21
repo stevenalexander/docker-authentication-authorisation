@@ -1,0 +1,9 @@
+{
+  "apiVersion": "v1beta1",
+  "kind": "Service",
+  "id": "session",
+  "port": 8084,
+  "containerPort": "http-server",
+  "selector": { "name": "session" },
+  "labels": {"name": "session"}
+}
